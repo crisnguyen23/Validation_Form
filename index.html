@@ -54,9 +54,10 @@
                 Validator.isEmail('#email'),
 
                 Validator.isRequired('#password'),
-                Validator.checkPassword('#password', 6, 10),
+                Validator.checkPassword('#password'),
 
                 Validator.isRequired('#password_confirmation'),
+                Validator.checkPassword('#password_confirmation'),
                 Validator.isConfirm('#password_confirmation', function() {
                     return document.querySelector('#password').value.trim()
                 }, 'Do not match with password above!'),
