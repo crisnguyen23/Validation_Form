@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Form</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="main">
+        <form action="URLadrressSendData" method="POST" class="form" id="form-1">
+            <h2 class="heading">REGISTER FORM</h2>
+            <p class="des">Learn JavaScript together with Cris Nguyen 🍌</p>
+
+            <div class="form-group">
+                <label for="fullname" class="form-label">Full Name*</label>
+                <input type="text"  id="fullname" class="form-input" name="Fullname" placeholder="Long Nguyen" >  
+                <span class="form-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email*</label>
+                <input type="email"  id="email" class="form-input" name="Email" placeholder="acb@gmail.com" >
+                <span class="form-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password*</label>
+                <input type="password"  id="password" class="form-input" name="Password" placeholder="Fill password" >
+                <span class="form-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password_confirmation" class="form-label">Re-password*</label>
+                <input type="password"  id="password_confirmation" class="form-input" name="Password_confirmation" placeholder="Confirm password" >
+                <span class="form-message"></span>
+            </div>
+
+            <button class="form-submit">Sign up</button>
+        </form>
+
+    </div>
+
+    <script src="./validator.js"></script>
+    <script>
+        Validator({
+            form: '#form-1',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#fullname', 'Please fill your full name!'),
+                Validator.checkLength('#fullname', 4, 20),
+
+                Validator.isRequired('#email'),
+                Validator.isEmail('#email'),
+
+                Validator.isRequired('#password'),
+                Validator.checkPassword('#password', 6, 10),
+
+                Validator.isRequired('#password_confirmation'),
+                Validator.isConfirm('#password_confirmation', function() {
+                    return document.querySelector('#password').value.trim()
+                }, 'Do not match with password above!'),
+            ],
+
+            onSubmit: function(data) {
+                //call API
+                console.log(data)
+            }
+        })
+    </script>
+ 
+</body>
+</html>
